@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@openzeppelin/merkle-tree": "^1.0.7"
+  },
+  "type": "module",
+  "scripts": {
+    "generate": "node ./merkle/generate.js"
+  }
+}

@@ -1,3 +1,10 @@
+# tree
+tree.json
+rewards.json
+
+# node modules
+node_modules/
+
 # Compiler files
 cache/
 out/

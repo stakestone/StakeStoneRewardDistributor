@@ -52,7 +52,7 @@ contract StakeStoneRewardDistributor is AccessControl {
     }
 
     function finalTerminate(address[] memory _tokens) external onlyRole(SETTER_ROLE) {
-        require(terminatingStartTime - block.timestamp > 30 days, "Still terminating");
+        require(block.timestamp - terminatingStartTime > 30 days, "Still terminating");
 
         for(uint256 i=0; i<_tokens.length; i++) {
             TransferHelper.safeTransfer(_tokens[i], msg.sender, IERC20(_tokens[i]).balanceOf(address(this)));

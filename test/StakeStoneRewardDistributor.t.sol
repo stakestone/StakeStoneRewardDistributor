@@ -35,7 +35,7 @@ contract StakeStoneRewardDistributorTest is Test {
         totalAmounts[0] = 25 * 10 ** 17;
 
         uint256[] memory claim1Amounts = new uint256[](1);
-        claim1Amounts[0] = 24 * 10 ** 17;
+        claim1Amounts[0] = 22 * 10 ** 17;
 
         uint256[] memory claim2Amounts = new uint256[](1);
         claim2Amounts[0] = 1 * 10 ** 17;
@@ -43,5 +43,10 @@ contract StakeStoneRewardDistributorTest is Test {
         vm.startPrank(0x2222222222222222222222222222222222222222);
         d.claim(proofs, tokens, totalAmounts, claim1Amounts);
         d.claim(proofs, tokens, totalAmounts, claim2Amounts);
+
+        vm.startPrank(address(this));
+        d.startTerminate();
+        vm.warp(block.timestamp + 31 days);
+        d.finalTerminate(tokens);
     }
 }

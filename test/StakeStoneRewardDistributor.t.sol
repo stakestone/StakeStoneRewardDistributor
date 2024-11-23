@@ -22,12 +22,26 @@ contract StakeStoneRewardDistributorTest is Test {
     function test_Claim() public {
         d.setRoot(0xe93fb4943d9900427cf2ad2e4797ff74c8b62885d6fe5fbd504ac0d476857fd5);
 
+        bytes32[][] memory proofs = new bytes32[][](1);
         bytes32[] memory proof = new bytes32[](2);
         proof[0] = 0x6f67952441151b318fe497cb66f76cc7a7eac3d3393685327f333d46aea75b57;
         proof[1] = 0x8e33d2181623a3904ed57ae5aa3c221005089b00d84d8ac342e5973feffc47f1;
+        proofs[0] = proof;
+
+        address[] memory tokens = new address[](1);
+        tokens[0] = EIGEN;
+
+        uint256[] memory totalAmounts = new uint256[](1);
+        totalAmounts[0] = 25 * 10 ** 17;
+
+        uint256[] memory claim1Amounts = new uint256[](1);
+        claim1Amounts[0] = 24 * 10 ** 17;
+
+        uint256[] memory claim2Amounts = new uint256[](1);
+        claim2Amounts[0] = 1 * 10 ** 17;
 
         vm.startPrank(0x2222222222222222222222222222222222222222);
-        d.claim(proof, EIGEN, 25 * 10 ** 17, 24 * 10 ** 17);
-        d.claim(proof, EIGEN, 25 * 10 ** 17, 1 * 10 ** 17);
+        d.claim(proofs, tokens, totalAmounts, claim1Amounts);
+        d.claim(proofs, tokens, totalAmounts, claim2Amounts);
     }
 }
